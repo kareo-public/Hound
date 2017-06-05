@@ -41,6 +41,7 @@ type IndexOptions struct {
 }
 
 type SearchOptions struct {
+	Query             string
 	IgnoreCase        bool
 	LinesOfContext    uint
 	FileRegexp        string
@@ -140,13 +141,13 @@ func GetRegexpPattern(pat string, ignoreCase bool) string {
 	return "(?m)" + pat
 }
 
-func (n *Index) Search(pat string, opt *SearchOptions) (*SearchResponse, error) {
+func (n *Index) Search(opt *SearchOptions) (*SearchResponse, error) {
 	startedAt := time.Now()
 
 	n.lck.RLock()
 	defer n.lck.RUnlock()
 
-	re, err := regexp.Compile(GetRegexpPattern(pat, opt.IgnoreCase))
+	re, err := regexp.Compile(GetRegexpPattern(opt.Query, opt.IgnoreCase))
 	if err != nil {
 		return nil, err
 	}

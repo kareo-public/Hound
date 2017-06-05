@@ -69,7 +69,7 @@ func searchAll(
 	ch := make(chan *searchResponse, n)
 	for _, repo := range repos {
 		go func(repo string) {
-			fms, err := idx[repo].Search(query, opts)
+			fms, err := idx[repo].Search(opts)
 			ch <- &searchResponse{repo, fms, err}
 		}(repo)
 	}

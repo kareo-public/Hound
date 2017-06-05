@@ -110,12 +110,10 @@ func (s *Searcher) swapIndexes(idx *index.Index) error {
 
 // Perform a basic search on the current index using the supplied pattern
 // and the options.
-//
-// TODO(knorton): pat should really just be a part of SearchOptions
-func (s *Searcher) Search(pat string, opt *index.SearchOptions) (*index.SearchResponse, error) {
+func (s *Searcher) Search(opt *index.SearchOptions) (*index.SearchResponse, error) {
 	s.lck.RLock()
 	defer s.lck.RUnlock()
-	return s.idx.Search(pat, opt)
+	return s.idx.Search(opt)
 }
 
 // Get the excluded files as a JSON string. This is only used for returning
