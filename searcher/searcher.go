@@ -214,7 +214,6 @@ func findExistingRefs(dbpath string) (*foundRefs, error) {
 // one will be built.
 func buildAndOpenIndex(
 	opt *index.IndexOptions,
-	dbpath,
 	vcsDir,
 	idxDir,
 	url,
@@ -341,7 +340,6 @@ func updateAndReindex(
 	log.Printf("Rebuilding %s for %s", name, newRev)
 	idx, err := buildAndOpenIndex(
 		opt,
-		dbpath,
 		vcsDir,
 		nextIndexDir(dbpath),
 		repo.Url,
@@ -400,7 +398,6 @@ func newSearcher(
 
 	idx, err := buildAndOpenIndex(
 		opt,
-		dbpath,
 		vcsDir,
 		idxDir,
 		repo.Url,

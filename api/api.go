@@ -54,7 +54,6 @@ type searchResponse struct {
  * Searches all repos in parallel.
  */
 func searchAll(
-	query string,
 	opts *index.SearchOptions,
 	repos []string,
 	idx map[string]*searcher.Searcher,
